@@ -47,9 +47,7 @@ void main_task(__unused void *params) {
     // run a UART case swap letters
     char c;
     while(c = getchar()) {
-        if (c <= 'z' && c >= 'a') putchar(c - 32);          // Check for lowercase, make uppercase
-        else if (c >= 'A' && c <= 'Z') putchar(c + 32);     // Check for uppercase, make lowercase
-        else putchar(c);                                    // Default case, special character
+        else putchar(char_swap(c));     // Default case, special character
     }
 }
 

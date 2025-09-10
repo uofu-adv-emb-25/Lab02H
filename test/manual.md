@@ -6,5 +6,5 @@
 4. Follow execuction order
 5. Identify critical componenets
 6. Manually test case swap behavior
-7. Verify LED blinks
+7. Verify LED blinks (Long blink every 5 blinks)
 8. Design tests for refactored critical componenets
