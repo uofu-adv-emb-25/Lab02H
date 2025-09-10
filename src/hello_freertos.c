@@ -35,9 +35,9 @@ void main_task(__unused void *params) {
                 BLINK_TASK_STACK_SIZE, NULL, BLINK_TASK_PRIORITY, NULL);
     char c;
     while(c = getchar()) {
-        if (c <= 'z' && c >= 'a') putchar(c - 32);
-        else if (c >= 'A' && c <= 'Z') putchar(c + 32);
-        else putchar(c);
+        if (c <= 'z' && c >= 'a') putchar(c - 32);          // Check for lowercase, make uppercase
+        else if (c >= 'A' && c <= 'Z') putchar(c + 32);     // Check for uppercase, make lowercase
+        else putchar(c);                                    // Default case, special character
     }
 }
 
