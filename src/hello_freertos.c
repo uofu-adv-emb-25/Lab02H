@@ -15,15 +15,18 @@
 #include "pico/multicore.h"
 #include "pico/cyw43_arch.h"
 
-// start with the LED reset
-int count = 0;
-bool on = false;
+// helper functions
+#include "functions.h"
 
 // scheduling parameters
 #define MAIN_TASK_PRIORITY      ( tskIDLE_PRIORITY + 1UL )
 #define BLINK_TASK_PRIORITY     ( tskIDLE_PRIORITY + 2UL )
 #define MAIN_TASK_STACK_SIZE configMINIMAL_STACK_SIZE
 #define BLINK_TASK_STACK_SIZE configMINIMAL_STACK_SIZE
+
+// helper vars
+int state = 0;
+bool on = false;
 
 // blink the LED
 void blink_task(__unused void *params) {
@@ -32,9 +35,7 @@ void blink_task(__unused void *params) {
 
     // cycle the LED on and off
     while (true) {
-        cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, on);
-        if (count++ % 11) on = !on;
-        led_state(on);
+        cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, run_led_state(&state, &on));
         vTaskDelay(500);
     }
 }
@@ -48,7 +49,7 @@ void main_task(__unused void *params) {
     // run a UART case swap letters
     char c;
     while(c = getchar()) {
-        else putchar(char_swap(c));     // Default case, special character
+        putchar(char_swap(c));     // Default case, special character
     }
 }
 

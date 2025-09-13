@@ -3,8 +3,11 @@
 
 #include <stdbool.h>
 
-bool get_led(bool state);
+// run the led with the count state and power state as inputs/outputs to the function
+// this function is effective the update for each tick of the state FSM
+bool run_led_state(int*, bool*);
 
-char char_swap(char c);
+// swap upper and lower case letters
+char char_swap(const char c);
 
 #endif
